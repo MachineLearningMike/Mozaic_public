@@ -1,5 +1,5 @@
 
-##<div align="center">Data Scheme for StarGate
+##<div align="center">Data Scheme for StarGate</div>
 
 - This document **only defines** the farming performance gauge data of the StarGate bridge.
 - This document does not specify optimized algorithms that collect and compute the data.
