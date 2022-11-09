@@ -20,15 +20,15 @@
 - **LPpUSD^b^~c,p~**: The B-Average of LPpUSD~c,p~
 - **STGP**: The value of STG price quote in USD
 - **STGP^b^**: The B-Average of STGP
-- **STGpB~c,p~**: The value of STG-per-Block for the pool p on the chain c, at a given time. Note: STGpB~c,p~ = STGpB~c~ * ALLOC~c,p~ /T_ALLOC~c~ at a given time.
+- **STGpB~c,p~**: The value of STG-per-Block for the pool p on the chain c, at a given time. <br/>Note: STGpB~c,p~ = STGpB~c~ * ALLOC~c,p~ /T_ALLOC~c~ at a given time.
 - **STGpB^b^~c,p~**: The B-Average of STGpB~c,p~
 - **SLP~c,p~**: The value of Staked LP for the pool p on the chain c, at a given time.
 - **SLP^b^~c,p~**: The B-Average of SLP~c,p~
-- **STGpLP~c,p~**: The value of STG-per-LP for the pool p on the chain c, at a given time. Note: STGpLP~c,p~ = STGpB~c,p~ /SLP~c,p~ at a given time.
+- **STGpLP~c,p~**: The value of STG-per-LP for the pool p on the chain c, at a given time. <br/>Note: STGpLP~c,p~ = STGpB~c,p~ /SLP~c,p~ at a given time.
 - **STGpLP^b^~c,p~**: The B-Average of STGpLP~c,p~
-- **ROI~c,p~**: The value of Return-On-Investment for the pool p on the chain c, at a given time. Note: ROI~c,p~ = STGP * STGpLP~c~ * LPpUSD~c,p~  at a given time.
+- **ROI~c,p~**: The value of Return-On-Investment for the pool p on the chain c, at a given time. <br/>Note: ROI~c,p~ = STGP * STGpLP~c~ * LPpUSD~c,p~  at a given time.
 - **ROI^b^~c,p~**: The B-Average of ROI~c,p~
-- **APY~c,p~**: The value of Annual Profit Yield for the pool p on the chain c, at a given time. Note: APY~c,p~ = (1 + ROI~c,p~) ** (year / AvgBlockTime~c~) -1  at a given time.
+- **APY~c,p~**: The value of Annual Profit Yield for the pool p on the chain c, at a given time. <br/>Note: APY~c,p~ = (1 + ROI~c,p~) ** (year / AvgBlockTime~c~) -1  at a given time.
 - **APY^b^~c,p~**: The B-Average of APY~c,p~
 <br/> <br/> <br/> <br/> <br/> <br/>
 
