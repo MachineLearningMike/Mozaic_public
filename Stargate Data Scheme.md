@@ -9,8 +9,8 @@
 
 - **B-Average** of feature X in a block is defined to be $1/n * \sum_{i=0}^{n-1} x_i$, where $\{x_i | i = 0, 1, ..., n-1\}$ are values that are held by X sequentially in the block and $x_k \neq x_{k+1}$ for all $k$. **Example**: If Balance has a constant value 30 in the block, then the B-Average of Balance is 30. If Balance has two values 30 and 40 in total sequentially in the block, then the B-Average of Balance is $1/2 * (30+40) = 35$
 <br/>
-- **AvgBlockTime~c~**: The average time duration spent to mine a block on the chain c.
-- **STGpB_c**: The value of STG-per-Block on the chain c, at a given time.
+- **AvgBlockTime~c~**: The average time duration spent to mine a block on the chain c. (Chain-level)
+- **STGpB~c~**: The value of STG-per-Block on the chain c, at a given time.
 - **STGpB^b^~c~**: The B-Average of STGpB~c~
 - **ALLOC~c,p~**: The value of AllocPoint for the pool p on the chain c, at a given time.
 - **ALLOC^b^~c,p~**: The B-Average of ALLOC~c,p~
@@ -28,7 +28,7 @@
 - **STGpLP^b^~c,p~**: The B-Average of STGpLP~c,p~
 - **ROI~c,p~**: The value of Return-On-Investment for the pool p on the chain c, at a given time. <br/>Note: ROI~c,p~ = STGP * STGpLP~c~ * LPpUSD~c,p~  at a given time.
 - **ROI^b^~c,p~**: The B-Average of ROI~c,p~
-- **APY~c,p~**: The value of Annual Profit Yield for the pool p on the chain c, at a given time. <br/>Note: APY~c,p~ = (1 + ROI~c,p~) ** (year / AvgBlockTime~c~) -1  at a given time.
+- **APY~c,p~**: The value of Annual Profit Yield for the pool p on the chain c, at a given time. <br/>Note: APY~c,p~ = (1 + ROI~c,p~) ** (year / AvgBlockTime~c~) - 1  at a given time.
 - **APY^b^~c,p~**: The B-Average of APY~c,p~
 <br/> <br/> <br/> <br/> <br/> <br/>
 
@@ -36,38 +36,31 @@
 #### 2. Timeframe-level data
 <br/>
 
-- **Timeframe**: time interval $[T_a, T_b)$, where $T_a$ and $T_b$ are the Unix timestamp of an integer second. Note the interval is closed to the left, meaning $T_a$ belongs to the interval, and open to the right, meaning $T_b$ does not belong to the interval.
+- **Timeframe**: time interval $[T_a, T_b)$, where $T_a$ and $T_b$ are the Unix timestamp of an integer second. Note $T_b$ does *not* belong to the interval.
 - **A block belongs to a timeframe** if and only if the timestamp of the block belongs to the timeframe.
-  <br/>
-- **BlockValue(X, B)** denotes the value of the feature X at the block B. Example: BlockValue(X, B) = X^b^ the B-Average of X.
+- **BlockValue(X, B)** denotes the value of a feature X on the block B. **Examples** of BlockValue(X, B) are the B-Average, defined in the above section, and snapshot, which is the value of X at a opening/closing time of the block.
+- Some concepts of around a feature X on a timeframe are defined as follow: <br/>**#-Sum** of X on a timeframe = $\sum_{i=0}^{n-1} BlockValue(X, B_i)$, <br/>**#-Product** of X on a timeframe = $\prod_{i=0}^{n-1} BlockValue(X, B_i)$, <br />**#-Average** of X a timeframe = $1/n * \sum_{i=0}^{n-1} BlockValue(X, B_i)$, <br/>where $\{B_i | i = 0, 1, ..., n-1\}$ are all blocks that belong to the timeframe.
 <br/>
-- **#-Average** of a feature X in a timeframe is defined to be $1/n * \sum_{i=0}^{n-1} BlockValue(X, B_i)$, <br />where $\{B_i | i = 0, 1, ..., n-1\}$ are all blocks that belong to the timeframe.
+- **STGpB^a^~c~**: The #-Average of STGpB^b^~c~, on a timeframe, on the chain c.
+- **ALLOC^a^~c,p~**: The #-Average of ALLOC^b^~c,p~, on a timeframe, on the chain c.
+- **T_ALLOC^a^~c~**: The #-Average of T_ALLOC^b^~c~, on a timeframe, on the chain c.
+- **STGpB^a^~c,p~**: The #-Average of STGpB^b^~c,p~, on a timeframe, for the pool p on the chain c.
+- **SLP^a^~c,p~**: The #-Average of SLP^b^~c,p~, on a timeframe, for the pool p on the chain c.
+- **LPpUSD^a^~c,p~**: The #-Average of LPpUSD^b^~c,p~, on a timeframe, for the pool p on the chain c.
+- **STGpLP^a^~c,p~**: The #-Average of STGpB^b^~c,p~, on a timeframe, for the pool p on the chain c.
+- **STGpLP^s^~c,p~**: The Sum of STGpB^b^~c,p~, on a timeframe, for the pool p on the chain c.
+- **STGP^a^**: The #-Average of STGP^b^ on a timeframe.
 <br/>
-- **Sum** of a feature X in a timeframe is defined to be $\sum_{i=0}^{n-1} BlockValue(X, B_i)$, <br />where $\{B_i | i = 0, 1, ..., n-1\}$ are all blocks that belong to the timeframe.
+- **Average ROI~c,p~** := #-Average of ROI^b^~c,p~ the block-level Return-On-Investment, on a timeframe, for the pool p on the chain c.
+- **Sum ROI~c,p~** :=  #-Sum of ROI^b^~c,p~ the block-level Return-On-Investment, on a timeframe, for the pool p on the chain c.
+- **Compound ROI~c,p~** := #-Product of (ROI^b^~c,p~ +1) - 1. *This is meant to work as the **compound ROI** on the timeframe, compounded along the blocks.*
 <br/>
-- **STGpB^#^~c~**: The #-Average of STG-per-Block, on a given timeframe, on the chain c.
+- **Average APY~c,p~**:= #-Average of APY^b^~c,p~, on a timeframe, for the pool p on the chain c.
+- **Sum APY~c,p~**:= #-Sum of APY^b^~c,p~, on a timeframe, for the pool p on the chain c.
+- **Compound APY~c,p~** := (1+Compound ROI~c,p~)**(year/frametime) - 1, on a timeframe, for the pool p on the chain c.
 <br/>
-- **ALLOC^#^~c,p~**: The #-Average of AllocPoint, on a given timeframe, on the chain c.
-<br/>
-- **T_ALLOC^#^~c~**: The #-Average of Total AllocPoint, on a given timeframe, on the chain c.
-<br/>
-- **STGpB^#^~c,p~**: The #-Average of STG-per-Block, on a given timeframe, for the pool p on the chain c.
-<br/>
-- **SLP^#^~c,p~**: The #-Average of Staked LP, on a given timeframe, for the pool p on the chain c.
-<br/>
-- **LPpUSD^#^~c,p~**: The #-Average of LP-per-USD, on a given timeframe, for the pool p on the chain c.
-<br/>
-- **STGpLP^#^~c,p~**: The #-Average of STG-per-LP, on a given timeframe, for the pool p on the chain c.
-- **STGpLP^s^~c,p~**: The Sum of STG-per-LP, on a given timeframe, for the pool p on the chain c.
-  <br/>
-- **STGP^#^**: The #-Average of STG price quote in USD on the timeframe f.
-<br/>
-- **ROI^#^~c,p~**: The #-Average of Return-On-Investment, on a given timeframe, for the pool p on the chain c.
-- **ROI^s^~c,p~**: The Sum of Return-On-Investment, on a given timeframe, for the pool p on the chain c.
-<br/>
-- **APY^#^~c,p~**: The #-Average of Annual Profit Yield, on a given timeframe, for the pool p on the chain c.
-- **APY^s^~c,p~**: The Sum of Annual Profit Yield, on a given timeframe, for the pool p on the chain c.
-<br/>
+
+**Attention**: Compound ROI~c,p~, Compound APY~c~
 
 
 
