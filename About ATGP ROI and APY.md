@@ -1,8 +1,7 @@
-##Here are some thought tests:
+##<div align="center"> Thinking STGP, ROI and APY <div/>
 
 We want to calculate APY in a timeframe, which equals (1 + ROI) ** (year / FrameTime) - 1.
-So, we first calculate ROI in the timeframe, which is STGP * STGpLP,
-where
+So, we first calculate ROI in the timeframe, which is STGP * STGpLP, where
    - STGP is STG price in USD (All stable coins are finally backed to USD), which has discrepancy between published and in-house data sets.
   - and STGpLP is the amount of STG dividend earned by a unit of LP staked in the farming in a given timeframe, which we **can** track WITHOUT error.
 
