@@ -1,13 +1,13 @@
-##Here is some thought test:
+##Here are some thought tests:
 
-We want to calculate APY in the timeframe, which is equals (1 + ROI) ** (year / FrameTime) - 1.
+We want to calculate APY in a timeframe, which equals (1 + ROI) ** (year / FrameTime) - 1.
 So, we first calculate ROI in the timeframe, which is STGP * STGpLP,
 where
    - STGP is STG price in USD (All stable coins are finally backed to USD), which has discrepancy between published and in-house data sets.
-  - and STGpLP is the amount of STG dividend earned by a unit of LP staked in the farming in a given timeframe, which we can track WITHOUT error.
+  - and STGpLP is the amount of STG dividend earned by a unit of LP staked in the farming in a given timeframe, which we **can** track WITHOUT error.
 
 ####1. STGP the likely source of discrepancy
-**Definition by example** Distribution of the feature X across pools means the unit vector which has the direction (X value in 1st pool, X value in 2nd pool, ...), all captured at, or representing, the same time moment.
+**Definition by example** Distribution of the feature X across pools means the unit vector which has the direction (X value in 1st pool, X value in 2nd pool, ...), all captured at, or representing, the same time interval.
 Once we decide to invest in StarGate, the distribution, across pools, of our investment should follow the distribution of STGP * STGpLP, which is the same as the distribution of STGpLP. (This is, of course, not very precise and we will be talking about it on a later stage). STGP is not required here. <br>
 STGP is only required when we take into account the distribution, across DeFi protocols like Binance and cBridge, of our investment. When STGP is required, we can collect it from the authoritative firms, like Binance.
 <br/>
