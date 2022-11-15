@@ -9,10 +9,11 @@ So, we first calculate ROI in the timeframe, which is STGP * STGpLP, where
 **Definition by example** Distribution of the feature X across pools means the unit vector which has the direction (X value in 1st pool, X value in 2nd pool, ...), all captured at, or representing, the same time interval.
 Once we decide to invest in StarGate, the distribution, across pools, of our investment should follow the distribution of STGP * STGpLP, which is the same as the distribution of STGpLP. (This is, of course, not very precise and we will be talking about it on a later stage). STGP is not required here. <br>
 STGP is only required when we take into account the distribution, across DeFi protocols like Binance and cBridge, of our investment. When STGP is required, we can collect it from the authoritative firms, like Binance.
-<br/>
+<br/> We have two type of operation:
 
 - **Logal Optimization**: We have decided to invest/keep a given amount of fund in Stargate. Then we can further assume STGP = 1. Now predict ROI = STGP * STGpLP. We only need to predict STGpLP.
 - **Global Optimization**: We want to decide how much fund to invest/keep in each of multiple pools at the same time. We cannot assume STGP = 1. We can borrow STGP from Binance or othre sources. We still need to predict STGpLP, though.
+<br/><br/><br/><br/><br/><br/><br/><br/>
 
 ####2. APY. ROI vs. APY
 
@@ -29,7 +30,7 @@ If our ROI ever happens to be 2% in 15 min, APY becomes a 301-figure number. Eas
 (1 + 0.0002) ** 35,040 - 1 = 1103.66
 Here, 2X ROI does not give 2X APY. APY is has severe non-linearity. **It distorts reality over million times when ROI is large.**
 
-- If users choose investment based on APY, then 2X ROI may get 1 million billion X in favor, rather than 2X. They will get unexpected results, in favor or not. **This is the place where our AI comes into play** to give results consistent with intuition. The true intuition is ROI.
+- If users decide investment based on APY, then 2X ROI may get 1 million billion X liked, rather than 2X. They will get unexpected results. **This is the place where our AI comes into play** to give results consistent with intuition. The true intuition is ROI.
 <br/>
 
 **We will follow ROI, while nun-customer users follow APY, when decide our investment distribution.**
